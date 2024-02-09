@@ -18,8 +18,8 @@ def read_shadow():
     try:
         with open("shadow.txt", 'r') as file:
             for line in file:
-                # Process each line as needed
-                process_line_data(line)
+                brute_force(line)
+                break
     except FileNotFoundError:
         print(f"File 'shadow.txt' not found.")
     except Exception as e:
@@ -31,10 +31,13 @@ def brute_force(line):
         # run checkpq(b"word", b"hash") for the given user past the colon
     
     words = get_words()
+    user = line[:line.find(':')]
     user_hash = bytes(line[(line.find(':')+1):])
     for word in words:
         if checkpw(bytes(word), user_hash):
-            return True
+            print(user + "'s password: " + word)
+            print(user + "'s hash: " + str(user_hash))
+            return
 
 
 def get_words():
@@ -44,3 +47,5 @@ def get_words():
     filtered_words = list(filter(lambda x: 6 <= len(x) <= 10, words))
     return filtered_words
 
+if __name__ == "__main__":
+    read_shadow()
