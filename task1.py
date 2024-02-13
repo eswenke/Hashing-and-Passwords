@@ -45,9 +45,11 @@ def task_b():
     string2 = "b"
     for _ in range(3):
         print(string1)
-        print(custom_hash(string1.encode(), 256))
+        hash1 = custom_hash(string1.encode(), 256)
+        print(hash1)
         print(string2)
-        print(custom_hash(string2.encode(), 256))
+        hash2 = custom_hash(string2.encode(), 256)
+        print(hash2)
         string1 = chr(ord(string1) + 2)
         string2 = chr(ord(string2) + 2)
 
@@ -84,7 +86,6 @@ def visualize_data():
     plt.grid(True)
     plt.savefig("num_inputs_graph.png")
     plt.show()
-
 
 def read_data_from_file():
     digest_sizes, times, num_inputs = [], [], []
